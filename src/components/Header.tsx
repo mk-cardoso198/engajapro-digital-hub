@@ -95,7 +95,7 @@ export default function Header() {
           <DesktopMenu />
 
           <div className="flex items-center gap-3">
-            <RainbowButton className="hidden lg:inline-flex">
+            <RainbowButton className="hidden lg:inline-flex text-white">
               Contato
             </RainbowButton>
             <MobileNav />
@@ -227,7 +227,7 @@ function MobileNav() {
             </SheetClose>
           </div>
           <div className="pt-4">
-            <RainbowButton className="w-full">Contato</RainbowButton>
+            <RainbowButton className="w-full text-white">Contato</RainbowButton>
           </div>
         </div>
       </SheetContent>

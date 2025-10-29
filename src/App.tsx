@@ -21,18 +21,19 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <div className="relative min-h-screen bg-black">
-            <Vortex 
-              className="w-full h-full"
-              containerClassName="fixed inset-0 z-0"
-              particleCount={700}
-              baseSpeed={0.0}
-              rangeSpeed={1.5}
-              baseRadius={1}
-              rangeRadius={2}
-              baseHue={220}
-              backgroundColor="#000000"
-            />
+          <div className="relative min-h-screen bg-black overflow-x-hidden">
+            <div className="fixed inset-0 w-full h-full z-0">
+              <Vortex 
+                particleCount={1000}
+                baseSpeed={0.0}
+                rangeSpeed={2}
+                baseRadius={1}
+                rangeRadius={3}
+                baseHue={220}
+                backgroundColor="#000000"
+                rangeY={800}
+              />
+            </div>
             <div className="relative z-10">
               <Routes>
                 <Route path="/" element={<Index />} />

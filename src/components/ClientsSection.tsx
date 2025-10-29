@@ -18,37 +18,37 @@ const logos = [
     id: "avenida",
     description: "Avenida F.C.",
     image: avenida,
-    className: "h-16 w-auto",
+    className: "h-16 w-auto object-contain",
   },
   {
     id: "bigodes",
     description: "Bigodes FC",
     image: bigodes,
-    className: "h-16 w-auto",
+    className: "h-16 w-auto object-contain",
   },
   {
     id: "copa-arena",
     description: "Copa Arena Futsal",
     image: copaArena,
-    className: "h-16 w-auto",
+    className: "h-16 w-auto object-contain",
   },
   {
     id: "nalaje",
     description: "Nalaje",
     image: nalaje,
-    className: "h-16 w-auto",
+    className: "h-16 w-auto object-contain",
   },
   {
     id: "cria",
     description: "CRIA",
     image: cria,
-    className: "h-14 w-auto",
+    className: "h-16 w-auto object-contain",
   },
   {
     id: "supercopa",
     description: "Super Copa Itanhaém",
     image: supercopa,
-    className: "h-16 w-auto",
+    className: "h-16 w-auto object-contain",
   },
 ];
 
