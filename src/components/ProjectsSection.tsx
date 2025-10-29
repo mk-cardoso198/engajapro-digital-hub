@@ -63,7 +63,7 @@ export default function ProjectsSection() {
           {projects.map((project, index) => (
             <Card 
               key={index}
-              className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
+              className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
             >
               <div className="relative h-48 overflow-hidden">
                 <img 

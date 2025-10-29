@@ -58,7 +58,7 @@ export default function MethodologySection() {
   return (
     <section className="py-32 bg-transparent">
       <div className="container mx-auto px-4">
-        <div className="w-full max-w-6xl mx-auto p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
+        <div className="w-full max-w-6xl mx-auto p-8 bg-black/85 backdrop-blur-lg rounded-2xl border border-white/10">
           {/* Top Navigation */}
           <div className="flex items-center justify-between mb-12">
             <div className="flex items-center gap-4">

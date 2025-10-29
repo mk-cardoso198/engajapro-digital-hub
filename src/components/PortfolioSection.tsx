@@ -59,7 +59,7 @@ export default function PortfolioSection() {
             return (
               <Card 
                 key={index}
-                className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group"
+                className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group"
               >
                 <CardHeader>
                   <div className="flex items-center justify-between mb-4">

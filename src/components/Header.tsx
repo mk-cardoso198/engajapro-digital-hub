@@ -117,7 +117,7 @@ function DesktopMenu() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-white hover:text-blue-400">Serviços</NavigationMenuTrigger>
-          <NavigationMenuContent className="left-0">
+          <NavigationMenuContent>
             <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2">
               {servicosLinks.map((link) => (
                 <li key={link.href}>
@@ -129,7 +129,7 @@ function DesktopMenu() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-white hover:text-blue-400">Portfólio</NavigationMenuTrigger>
-          <NavigationMenuContent className="left-0">
+          <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4">
               {portfolioLinks.map((link) => (
                 <li key={link.href}>
