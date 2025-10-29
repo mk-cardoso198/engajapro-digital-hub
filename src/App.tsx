@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Vortex } from "@/components/ui/vortex";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -20,11 +21,25 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="relative min-h-screen bg-black">
+            <Vortex 
+              className="w-full h-full"
+              containerClassName="fixed inset-0 z-0"
+              particleCount={700}
+              baseSpeed={0.0}
+              rangeSpeed={1.5}
+              baseRadius={1}
+              rangeRadius={2}
+              baseHue={220}
+              backgroundColor="#000000"
+            />
+            <div className="relative z-10">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </div>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

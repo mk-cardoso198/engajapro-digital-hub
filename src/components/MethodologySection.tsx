@@ -11,7 +11,6 @@ interface ProcessStep {
   subtitle: string;
   description: string;
   details: string[];
-  duration: string;
   image: string;
 }
 
@@ -22,8 +21,7 @@ const METHODOLOGY_STEPS: ProcessStep[] = [
     subtitle: "Entendendo Seu Negócio",
     description: "Iniciamos com uma análise completa do seu negócio, público-alvo e objetivos para criar uma estratégia personalizada.",
     details: ["Análise de Mercado", "Estudo da Concorrência", "Definição de Personas", "Mapeamento de Objetivos"],
-    duration: "1-2 semanas",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
   },
   {
     id: "02",
@@ -31,8 +29,7 @@ const METHODOLOGY_STEPS: ProcessStep[] = [
     subtitle: "Construindo Sua Identidade",
     description: "Desenvolvemos uma identidade visual única e estratégias de conteúdo que ressoam com seu público.",
     details: ["Design de Marca", "Estratégia de Conteúdo", "Planejamento Visual", "Tom de Voz"],
-    duration: "2-3 semanas",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
   },
   {
     id: "03",
@@ -40,8 +37,7 @@ const METHODOLOGY_STEPS: ProcessStep[] = [
     subtitle: "Colocando em Prática",
     description: "Implementamos as estratégias com monitoramento constante e ajustes baseados em dados reais.",
     details: ["Criação de Conteúdo", "Gestão de Campanhas", "Monitoramento 24/7", "Otimização Contínua"],
-    duration: "Contínuo",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
   },
   {
     id: "04",
@@ -49,8 +45,7 @@ const METHODOLOGY_STEPS: ProcessStep[] = [
     subtitle: "Crescimento Exponencial",
     description: "Amplificamos os resultados com tráfego pago estratégico e otimização de conversões.",
     details: ["Campanhas de Anúncios", "Remarketing Avançado", "Otimização de ROI", "Escala Sustentável"],
-    duration: "Contínuo",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=600&fit=crop",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
   },
 ];
 
@@ -99,17 +94,16 @@ export default function MethodologySection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-12 grid md:grid-cols-2 gap-12"
+                className="mt-12"
               >
-                {/* Content */}
-                <div>
+                <div className="text-center max-w-3xl mx-auto">
                   <span className="text-sm font-bold text-blue-400">{activeStepData.id}</span>
                   <h2 className="text-4xl font-bold mt-2 text-white">{activeStepData.title}</h2>
                   <p className="mt-1 text-white/60">{activeStepData.subtitle}</p>
                   <p className="mt-4 text-white/80 text-lg">{activeStepData.description}</p>
-                  <div className="mt-6 grid sm:grid-cols-2 gap-4">
+                  <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
                     {activeStepData.details.map((detail, i) => (
-                      <div key={i} className="flex items-center gap-3">
+                      <div key={i} className="flex items-center gap-3 justify-center">
                         <div className="w-6 h-6 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-xs font-bold">
                           ✓
                         </div>
@@ -117,22 +111,12 @@ export default function MethodologySection() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-6 flex items-center gap-3 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-                    <span className="text-blue-400 text-xl">⏳</span>
-                    <span className="text-sm font-semibold text-white">Duração: {activeStepData.duration}</span>
-                  </div>
-                </div>
-
-                {/* Phone Mockup */}
-                <div className="flex items-center justify-center">
-                  <div className="w-64 h-[512px] bg-slate-900 rounded-[40px] p-4 border-4 border-slate-700 shadow-2xl">
-                    <div className="w-full h-full bg-black rounded-[24px] overflow-hidden">
-                      <img 
-                        src={activeStepData.image} 
-                        alt={activeStepData.title} 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                  <div className="mt-12 flex justify-center">
+                    <img 
+                      src={activeStepData.image} 
+                      alt={activeStepData.title} 
+                      className="w-full max-w-md h-48 object-cover rounded-xl shadow-2xl"
+                    />
                   </div>
                 </div>
               </motion.div>

@@ -10,7 +10,7 @@ import avenida from '@/assets/clients/avenida.png';
 import bigodes from '@/assets/clients/bigodes.png';
 import copaArena from '@/assets/clients/copa-arena.png';
 import nalaje from '@/assets/clients/nalaje.png';
-import cria from '@/assets/clients/cria.png';
+import cria from '@/assets/clients/cria-white.png';
 import supercopa from '@/assets/clients/supercopa.png';
 
 const logos = [
@@ -42,7 +42,7 @@ const logos = [
     id: "cria",
     description: "CRIA",
     image: cria,
-    className: "h-12 w-auto",
+    className: "h-14 w-auto",
   },
   {
     id: "supercopa",
@@ -75,11 +75,11 @@ export default function ClientsSection() {
                   key={logo.id}
                   className="flex basis-1/2 md:basis-1/3 lg:basis-1/4 justify-center pl-0"
                 >
-                  <div className="mx-10 flex shrink-0 items-center justify-center p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all">
+                  <div className="mx-10 flex shrink-0 items-center justify-center">
                     <img
                       src={logo.image}
                       alt={logo.description}
-                      className={`${logo.className} ${logo.id === 'cria' ? 'brightness-0 invert' : ''} opacity-80 hover:opacity-100 transition-opacity`}
+                      className={`${logo.className} opacity-80 hover:opacity-100 transition-opacity`}
                     />
                   </div>
                 </CarouselItem>
