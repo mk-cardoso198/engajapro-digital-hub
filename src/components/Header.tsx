@@ -77,7 +77,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
       <div
         className={cn(
-          'bg-background/95 supports-[backdrop-filter]:bg-background/80',
+          'bg-black/40 supports-[backdrop-filter]:bg-black/30 border-white/10',
           'mx-auto h-16 w-full max-w-7xl border px-6 rounded-2xl backdrop-blur-xl',
           'shadow-lg'
         )}
@@ -87,9 +87,9 @@ export default function Header() {
             <img 
               src={logoWhite} 
               alt="Engaja Pro" 
-              className="h-10 w-10 object-contain brightness-0 dark:brightness-100"
+              className="h-10 w-10 object-contain"
             />
-            <span className="font-bold text-xl">Engaja Pro</span>
+            <span className="font-bold text-xl text-white">Engaja Pro</span>
           </a>
 
           <DesktopMenu />
@@ -111,12 +111,12 @@ function DesktopMenu() {
     <NavigationMenu className="hidden lg:block">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuLink href="/" className="cursor-pointer">
+          <NavigationMenuLink href="/" className="cursor-pointer text-white hover:text-blue-400">
             Início
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Serviços</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-white hover:text-blue-400">Serviços</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2">
               {servicosLinks.map((link) => (
@@ -128,7 +128,7 @@ function DesktopMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Portfólio</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-white hover:text-blue-400">Portfólio</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4">
               {portfolioLinks.map((link) => (
@@ -140,12 +140,12 @@ function DesktopMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="#cases" className="cursor-pointer">
+          <NavigationMenuLink href="#cases" className="cursor-pointer text-white hover:text-blue-400">
             Cases
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="#sobre" className="cursor-pointer">
+          <NavigationMenuLink href="#sobre" className="cursor-pointer text-white hover:text-blue-400">
             Sobre
           </NavigationMenuLink>
         </NavigationMenuItem>

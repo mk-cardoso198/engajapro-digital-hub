@@ -54,13 +54,13 @@ const logos = [
 
 export default function ClientsSection() {
   return (
-    <section className="py-20 md:py-32">
+    <section className="py-32 bg-transparent">
       <div className="container flex flex-col items-center text-center">
-        <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
           Alguns dos nossos clientes
         </h2>
-        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
-          Parceiros que confiam em nosso trabalho
+        <p className="text-white/70 text-lg md:text-xl max-w-2xl">
+          Empresas que confiam no nosso trabalho
         </p>
       </div>
       <div className="pt-12 md:pt-20">
@@ -73,21 +73,21 @@ export default function ClientsSection() {
               {logos.map((logo) => (
                 <CarouselItem
                   key={logo.id}
-                  className="flex basis-1/2 justify-center pl-0 sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
+                  className="flex basis-1/2 md:basis-1/3 lg:basis-1/4 justify-center pl-0"
                 >
-                  <div className="mx-8 md:mx-12 flex shrink-0 items-center justify-center">
+                  <div className="mx-10 flex shrink-0 items-center justify-center p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all">
                     <img
                       src={logo.image}
                       alt={logo.description}
-                      className={logo.className}
+                      className={`${logo.className} ${logo.id === 'cria' ? 'brightness-0 invert' : ''} opacity-80 hover:opacity-100 transition-opacity`}
                     />
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black to-transparent"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black to-transparent"></div>
         </div>
       </div>
     </section>
