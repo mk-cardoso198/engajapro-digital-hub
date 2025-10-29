@@ -61,7 +61,7 @@ export default function HeroSection() {
         </div>
 
         <p className="text-xl md:text-3xl text-white/80 mb-12 max-w-2xl font-light">
-          Transformando presença digital em resultados reais
+          Criamos Marcas Memoráveis e Resultados Reais
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -69,8 +69,9 @@ export default function HeroSection() {
             variant="outline" 
             size="lg"
             className="text-lg px-8 py-6"
+            asChild
           >
-            Portfólio
+            <a href="#portfolio">Portfólio</a>
           </Button>
           <RainbowButton className="text-lg px-8 py-6 text-white">
             Alavancar Agora

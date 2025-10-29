@@ -140,11 +140,6 @@ function DesktopMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="#cases" className="cursor-pointer text-white hover:text-blue-400">
-            Cases
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
           <NavigationMenuLink href="#sobre" className="cursor-pointer text-white hover:text-blue-400">
             Sobre
           </NavigationMenuLink>
@@ -215,11 +210,6 @@ function MobileNav() {
             ))}
           </Accordion>
           <div className="border-t pt-2 space-y-2">
-            <SheetClose asChild>
-              <a href="#cases" className="block px-4 py-2 hover:bg-accent rounded-md">
-                Cases
-              </a>
-            </SheetClose>
             <SheetClose asChild>
               <a href="#sobre" className="block px-4 py-2 hover:bg-accent rounded-md">
                 Sobre

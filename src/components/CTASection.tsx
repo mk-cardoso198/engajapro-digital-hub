@@ -14,13 +14,13 @@ export default function CTASection() {
               A questão é: <span className="text-blue-400 font-semibold">você está pronto para se destacar?</span>
             </p>
             
-            <RainbowButton 
-              className="text-lg px-10 py-7 text-white font-semibold shadow-2xl hover:scale-105 transition-transform"
+            <button
+              className="inline-flex items-center justify-center gap-2 text-lg px-10 py-7 text-white font-semibold shadow-2xl hover:scale-105 transition-transform rounded-xl bg-green-600 hover:bg-green-500 border-2 border-green-500"
               onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
             >
-              <MessageCircle className="w-6 h-6 mr-2" />
+              <MessageCircle className="w-6 h-6" />
               Falar com um Especialista
-            </RainbowButton>
+            </button>
             
             <p className="mt-6 text-white/50 text-sm">
               Resposta em até 2 horas • Consultoria gratuita
