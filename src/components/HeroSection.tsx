@@ -16,31 +16,9 @@ export default function HeroSection() {
         rangeSpeed={2}
       >
         <div className="flex flex-col items-center text-center z-10 max-w-4xl mx-auto px-4">
-          <div className="h-32 md:h-40 w-full flex items-center justify-center mb-8">
-            <VaporizeTextCycle
-              texts={[
-                <img key="logo" src={logoIntro} alt="Engaja Pro" className="h-24 md:h-32 w-auto" />,
-                "Engaja Pro"
-              ]}
-              font={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "70px",
-                fontWeight: 700,
-              }}
-              color="rgb(255, 255, 255)"
-              spread={5}
-              density={5}
-              animation={{
-                vaporizeDuration: 2,
-                fadeInDuration: 1,
-                waitDuration: 2,
-              }}
-              direction="left-to-right"
-              alignment="center"
-              tag={Tag.H1}
-              className="w-full h-full"
-            />
-          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white">
+            Engaja Pro
+          </h1>
 
           <p className="text-xl md:text-3xl text-foreground/90 mb-12 max-w-2xl font-light">
             Transformando presença digital em resultados reais
