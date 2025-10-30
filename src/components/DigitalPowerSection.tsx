@@ -39,22 +39,22 @@ export default function DigitalPowerSection() {
   const div7Ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-black to-blue-950/20">
-      <div className="max-w-4xl mx-auto text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-black to-blue-950/20">
+      <div className="max-w-4xl mx-auto text-center mb-8 md:mb-16">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 px-4">
           Usamos todo o poder das vias digitais ao seu favor
         </h2>
-        <p className="text-lg text-white/80 max-w-2xl mx-auto">
+        <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto px-4">
           Use todo o poder das suas vias digitas para alavancar seu negocio e sua imagem, 
           com as metodologias e tecnicas da Engaja Pro você pode subir para um novo nível
         </p>
       </div>
 
       <div
-        className="relative flex h-[400px] md:h-[500px] w-full max-w-4xl mx-auto items-center justify-center overflow-hidden p-4 md:p-10"
+        className="relative flex h-[300px] md:h-[450px] lg:h-[500px] w-full max-w-4xl mx-auto items-center justify-center overflow-hidden p-4 md:p-8 lg:p-10"
         ref={containerRef}
       >
-        <div className="flex size-full flex-col max-w-lg max-h-[280px] md:max-h-[350px] items-stretch justify-between gap-6 md:gap-10">
+        <div className="flex size-full flex-col max-w-sm md:max-w-md lg:max-w-lg max-h-[220px] md:max-h-[300px] lg:max-h-[350px] items-stretch justify-between gap-4 md:gap-8 lg:gap-10">
           <div className="flex flex-row items-center justify-between">
             <Circle ref={div1Ref}>
               <img src={whatsappIcon} alt="WhatsApp" className="w-full h-full object-contain" />

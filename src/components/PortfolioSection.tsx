@@ -42,18 +42,18 @@ const portfolioItems = [
 
 export default function PortfolioSection() {
   return (
-    <section id="portfolio" className="py-32 bg-gradient-to-b from-blue-950/20 to-black">
+    <section id="portfolio" className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-blue-950/20 to-black">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
             Nossos Serviços
           </h2>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto px-4">
             Soluções completas de marketing digital para alavancar sua presença online
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {portfolioItems.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -64,14 +64,14 @@ export default function PortfolioSection() {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-4">
                     <div className="p-3 bg-blue-500/20 rounded-lg group-hover:bg-blue-500/30 transition-colors">
-                      <Icon className="w-6 h-6 text-blue-400" />
+                      <Icon className="w-5 h-5 md:w-6 md:h-6 text-blue-400" />
                     </div>
-                    <span className="text-xs font-semibold text-blue-400 bg-blue-500/20 px-3 py-1 rounded-full">
+                    <span className="text-xs font-semibold text-blue-400 bg-blue-500/20 px-2 md:px-3 py-1 rounded-full">
                       {item.stats}
                     </span>
                   </div>
-                  <CardTitle className="text-white text-xl">{item.title}</CardTitle>
-                  <CardDescription className="text-white/60">
+                  <CardTitle className="text-white text-lg md:text-xl">{item.title}</CardTitle>
+                  <CardDescription className="text-white/60 text-sm md:text-base">
                     {item.description}
                   </CardDescription>
                 </CardHeader>

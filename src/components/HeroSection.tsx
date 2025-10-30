@@ -6,28 +6,29 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div className="flex flex-col items-center text-center z-10 max-w-4xl mx-auto px-4">
-        <div className="h-32 md:h-40 lg:h-48 w-full flex items-center justify-center mb-8">
+        <div className="h-24 md:h-32 lg:h-40 w-full flex items-center justify-center mb-6 md:mb-8">
           <VaporizeTextCycle
             texts={['Engaja Pro']}
             font={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '80px',
+              fontSize: '48px',
               fontWeight: 700,
             }}
             color="rgb(255, 255, 255)"
-            spread={3}
-            density={8}
+            spread={5}
+            density={5}
             animation={{
-              vaporizeDuration: 0,
-              fadeInDuration: 2,
+              vaporizeDuration: 2,
+              fadeInDuration: 1,
               waitDuration: 999999,
             }}
+            direction="left-to-right"
             alignment="center"
-            className="w-full h-full flex items-center justify-center text-5xl md:text-7xl lg:text-8xl"
+            className="w-full h-full"
           />
         </div>
 
-        <p className="text-xl md:text-3xl text-white/80 mb-12 max-w-2xl font-light">
+        <p className="text-lg md:text-2xl lg:text-3xl text-white/80 mb-8 md:mb-12 max-w-2xl font-light px-4">
           Criamos Marcas Memoráveis e Resultados Reais
         </p>
 
@@ -35,12 +36,12 @@ export default function HeroSection() {
           <Button 
             variant="outline" 
             size="lg"
-            className="text-lg px-8 py-6"
+            className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
             asChild
           >
             <a href="#portfolio">Portfólio</a>
           </Button>
-          <RainbowButton className="text-lg px-8 py-6 text-white">
+          <RainbowButton className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 text-white">
             Alavancar Agora
           </RainbowButton>
         </div>
