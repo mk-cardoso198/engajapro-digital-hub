@@ -3,7 +3,7 @@ import { MessageCircle } from 'lucide-react';
 
 export default function CTASection() {
   return (
-    <section className="py-32 bg-transparent">
+    <section className="py-32 bg-gradient-to-b from-blue-950/20 to-black">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="p-12 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-sm rounded-2xl border border-white/10 shadow-2xl">
