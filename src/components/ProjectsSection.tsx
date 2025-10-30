@@ -65,20 +65,7 @@ export default function ProjectsSection() {
               key={index}
               className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
             >
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <span className="text-xs font-semibold text-blue-400 bg-blue-500/20 px-3 py-1 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-              <CardHeader>
+              <CardHeader className="pt-6">
                 <div className="flex items-start justify-between">
                   <CardTitle className="text-white text-xl">{project.title}</CardTitle>
                   <ExternalLink className="w-5 h-5 text-white/40 group-hover:text-blue-400 transition-colors" />
@@ -86,6 +73,11 @@ export default function ProjectsSection() {
                 <CardDescription className="text-white/60">
                   {project.description}
                 </CardDescription>
+                <div className="mt-2">
+                  <span className="text-xs font-semibold text-blue-400 bg-blue-500/20 px-3 py-1 rounded-full">
+                    {project.category}
+                  </span>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2 text-green-400 font-semibold">

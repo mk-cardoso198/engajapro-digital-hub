@@ -1,7 +1,7 @@
 import { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
-import logoEngaja from "@/assets/logo-engaja-pro.png";
+import logoEngaja from "@/assets/logo-engaja-pro-center.svg";
 import youtubeIcon from "@/assets/social/youtube.svg";
 import googleIcon from "@/assets/social/google.svg";
 import instagramIcon from "@/assets/social/instagram.svg";
@@ -17,7 +17,7 @@ const Circle = forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-10 flex size-12 items-center justify-center rounded-full border-2 border-blue-500 bg-black/80 backdrop-blur-md p-3 shadow-[0_0_20px_rgba(59,130,246,0.5)]",
+        "z-10 flex size-16 md:size-20 items-center justify-center rounded-full border-2 border-blue-500 bg-black/80 backdrop-blur-md p-3 shadow-[0_0_20px_rgba(59,130,246,0.5)]",
         className,
       )}
     >
@@ -51,10 +51,10 @@ export default function DigitalPowerSection() {
       </div>
 
       <div
-        className="relative flex h-[500px] w-full max-w-4xl mx-auto items-center justify-center overflow-hidden rounded-lg border border-blue-500/20 bg-black/40 backdrop-blur-sm p-10"
+        className="relative flex h-[400px] md:h-[500px] w-full max-w-4xl mx-auto items-center justify-center overflow-hidden p-4 md:p-10"
         ref={containerRef}
       >
-        <div className="flex size-full flex-col max-w-lg max-h-[350px] items-stretch justify-between gap-10">
+        <div className="flex size-full flex-col max-w-lg max-h-[280px] md:max-h-[350px] items-stretch justify-between gap-6 md:gap-10">
           <div className="flex flex-row items-center justify-between">
             <Circle ref={div1Ref}>
               <img src={whatsappIcon} alt="WhatsApp" className="w-full h-full object-contain" />
@@ -67,7 +67,7 @@ export default function DigitalPowerSection() {
             <Circle ref={div2Ref}>
               <img src={instagramIcon} alt="Instagram" className="w-full h-full object-contain" />
             </Circle>
-            <Circle ref={div4Ref} className="size-20 border-4 shadow-[0_0_30px_rgba(59,130,246,0.7)]">
+            <Circle ref={div4Ref} className="size-24 md:size-28 border-4 shadow-[0_0_30px_rgba(59,130,246,0.7)]">
               <img src={logoEngaja} alt="Engaja Pro" className="w-full h-full object-contain" />
             </Circle>
             <Circle ref={div6Ref}>

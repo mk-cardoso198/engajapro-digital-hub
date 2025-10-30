@@ -19,7 +19,7 @@ export default function HeroSection() {
             density={8}
             animation={{
               vaporizeDuration: 0,
-              fadeInDuration: 1.5,
+              fadeInDuration: 2,
               waitDuration: 999999,
             }}
             alignment="center"
