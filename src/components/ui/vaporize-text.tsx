@@ -146,7 +146,8 @@ export default function VaporizeTextCycle({
   useEffect(() => {
     if (isInView) {
       const startAnimationTimeout = setTimeout(() => {
-        setAnimationState("vaporizing");
+        setAnimationState("fadingIn");
+        fadeOpacityRef.current = 0;
       }, 0);
       return () => clearTimeout(startAnimationTimeout);
     } else {
@@ -220,12 +221,7 @@ export default function VaporizeTextCycle({
           ctx.restore();
 
           if (fadeOpacityRef.current >= 1) {
-            setAnimationState("waiting");
-            setTimeout(() => {
-              setAnimationState("vaporizing");
-              vaporizeProgressRef.current = 0;
-              resetParticles(particlesRef.current);
-            }, animationDurations.WAIT_DURATION);
+            setAnimationState("static");
           }
           break;
         }
