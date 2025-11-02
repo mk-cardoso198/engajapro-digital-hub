@@ -1,11 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { RainbowButton } from '@/components/ui/rainbow-button';
 import VaporizeTextCycle from '@/components/ui/vaporize-text';
+import logoHero from '@/assets/logo-engaja-hero.png';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div className="flex flex-col items-center text-center z-10 max-w-4xl mx-auto px-4">
+        <img 
+          src={logoHero} 
+          alt="Engaja Pro Logo" 
+          className="w-32 h-auto md:w-40 lg:w-48 mb-4 md:mb-6 object-contain"
+        />
         <div className="h-24 md:h-32 lg:h-40 w-full flex items-center justify-center mb-6 md:mb-8">
           <VaporizeTextCycle
             texts={['Engaja Pro']}
