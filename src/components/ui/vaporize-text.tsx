@@ -92,7 +92,9 @@ export default function VaporizeTextCycle({
 
   const globalDpr = useMemo(() => {
     if (typeof window !== "undefined") {
-      return window.devicePixelRatio * 1.5 || 1;
+      const isMobile = window.innerWidth < 768;
+      const baseDpr = window.devicePixelRatio || 1;
+      return isMobile ? Math.min(baseDpr, 1.2) : Math.min(baseDpr * 1.5, 2);
     }
     return 1;
   }, []);
