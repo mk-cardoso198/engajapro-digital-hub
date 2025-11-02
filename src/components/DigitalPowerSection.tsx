@@ -39,7 +39,7 @@ export default function DigitalPowerSection() {
   const div7Ref = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-black to-blue-950/20">
+    <section id="digital-power" className="py-12 md:py-20 px-4 bg-gradient-to-b from-black to-blue-950/20">
       <div className="max-w-4xl mx-auto text-center mb-8 md:mb-16">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 px-4">
           Usamos todo o poder das vias digitais ao seu favor

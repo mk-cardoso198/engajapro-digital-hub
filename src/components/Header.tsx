@@ -39,19 +39,19 @@ import logoWhite from '@/assets/logo-engaja-pro-white.png';
 export const servicosLinks: NavItemType[] = [
   {
     title: 'Marketing Digital',
-    href: '#',
+    href: '#servicos',
     description: 'Estratégias completas para alavancar sua presença online',
     icon: Sparkles,
   },
   {
     title: 'Gestão de Redes Sociais',
-    href: '#',
+    href: '#servicos',
     description: 'Conteúdo que engaja e converte seu público',
     icon: BarChart,
   },
   {
     title: 'Consultoria',
-    href: '#',
+    href: '#servicos',
     description: 'Análise personalizada para seu negócio crescer',
     icon: Briefcase,
   },
@@ -60,13 +60,13 @@ export const servicosLinks: NavItemType[] = [
 export const portfolioLinks: NavItemType[] = [
   {
     title: 'Nossos Projetos',
-    href: '#',
+    href: '#projetos',
     description: 'Conheça os trabalhos que desenvolvemos',
     icon: FileText,
   },
   {
     title: 'Cases de Sucesso',
-    href: '#',
+    href: '#projetos',
     description: 'Resultados reais dos nossos clientes',
     icon: BarChart,
   },
@@ -95,7 +95,9 @@ export default function Header() {
           <DesktopMenu />
 
           <div className="flex items-center gap-3">
-            <RainbowButton className="hidden lg:inline-flex text-white">
+            <RainbowButton className="hidden lg:inline-flex text-white" onClick={() => {
+              document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               Contato
             </RainbowButton>
             <MobileNav />
@@ -140,7 +142,7 @@ function DesktopMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="#sobre" className="cursor-pointer text-white hover:text-blue-400">
+          <NavigationMenuLink href="#contato" className="cursor-pointer text-white hover:text-blue-400">
             Sobre
           </NavigationMenuLink>
         </NavigationMenuItem>
@@ -211,13 +213,17 @@ function MobileNav() {
           </Accordion>
           <div className="border-t pt-2 space-y-2">
             <SheetClose asChild>
-              <a href="#sobre" className="block px-4 py-2 hover:bg-accent rounded-md">
+              <a href="#contato" className="block px-4 py-2 hover:bg-accent rounded-md">
                 Sobre
               </a>
             </SheetClose>
           </div>
           <div className="pt-4">
-            <RainbowButton className="w-full text-white">Contato</RainbowButton>
+            <RainbowButton className="w-full text-white" onClick={() => {
+              document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
+              Contato
+            </RainbowButton>
           </div>
         </div>
       </SheetContent>

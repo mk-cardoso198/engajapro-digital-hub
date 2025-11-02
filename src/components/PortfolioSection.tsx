@@ -42,7 +42,7 @@ const portfolioItems = [
 
 export default function PortfolioSection() {
   return (
-    <section id="portfolio" className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-blue-950/20 to-black">
+    <section id="servicos" className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-blue-950/20 to-black">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">

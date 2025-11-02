@@ -42,7 +42,7 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
-    <section className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-black to-blue-950/20">
+    <section id="projetos" className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-black to-blue-950/20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">

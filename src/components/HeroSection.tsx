@@ -45,9 +45,11 @@ export default function HeroSection() {
             className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
             asChild
           >
-            <a href="#portfolio">Portfólio</a>
+            <a href="#projetos">Portfólio</a>
           </Button>
-          <RainbowButton className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 text-white">
+          <RainbowButton className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 text-white" onClick={() => {
+            document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+          }}>
             Alavancar Agora
           </RainbowButton>
         </div>
