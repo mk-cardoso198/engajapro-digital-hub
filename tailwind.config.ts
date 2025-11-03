@@ -86,7 +86,7 @@ export default {
         },
         "infinite-scroll": {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-25%)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
       animation: {

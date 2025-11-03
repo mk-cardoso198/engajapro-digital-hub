@@ -8,8 +8,8 @@ import supercopa from '@/assets/clients/supercopa.png';
 const ClientsCarousel = () => {
   const logos = [avenida, bigodes, copaArena, cria, nalaje, supercopa];
   
-  // Quadruplicar logos para efeito infinito suave
-  const allLogos = [...logos, ...logos, ...logos, ...logos];
+  // Duplicar logos para loop contínuo (usado com translateX(-50%))
+  const allLogos = [...logos, ...logos];
 
   return (
     <section className="w-full py-16 md:py-24 bg-black/50 overflow-hidden">
