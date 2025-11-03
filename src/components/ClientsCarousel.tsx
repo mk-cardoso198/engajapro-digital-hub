@@ -1,14 +1,15 @@
-import client01 from '@/assets/clients/client-01.svg';
-import client02 from '@/assets/clients/client-02.svg';
-import client03 from '@/assets/clients/client-03.svg';
-import client04 from '@/assets/clients/client-04.svg';
-import client05 from '@/assets/clients/client-05.svg';
+import avenida from '@/assets/clients/avenida.png';
+import bigodes from '@/assets/clients/bigodes.png';
+import copaArena from '@/assets/clients/copa-arena.png';
+import cria from '@/assets/clients/cria.png';
+import nalaje from '@/assets/clients/nalaje.png';
+import supercopa from '@/assets/clients/supercopa.png';
 
 const ClientsCarousel = () => {
-  const logos = [client01, client02, client03, client04, client05];
+  const logos = [avenida, bigodes, copaArena, cria, nalaje, supercopa];
   
-  // Duplicar logos para efeito infinito suave
-  const allLogos = [...logos, ...logos, ...logos];
+  // Quadruplicar logos para efeito infinito suave
+  const allLogos = [...logos, ...logos, ...logos, ...logos];
 
   return (
     <section className="w-full py-16 md:py-24 bg-black/50 overflow-hidden">
@@ -18,7 +19,10 @@ const ClientsCarousel = () => {
         </h2>
         
         <div className="relative">
-          <div className="flex gap-8 md:gap-12 lg:gap-16 animate-infinite-scroll">
+          <div 
+            className="flex gap-8 md:gap-12 lg:gap-16 animate-infinite-scroll"
+            style={{ willChange: 'transform' }}
+          >
             {allLogos.map((logo, index) => (
               <div
                 key={index}

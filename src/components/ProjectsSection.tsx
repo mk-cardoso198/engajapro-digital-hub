@@ -59,8 +59,9 @@ export default function ProjectsSection() {
               key={index}
               className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
             >
-              <div className="w-full h-48 bg-black flex items-center justify-center border-b border-white/10">
-                <span className="text-white/40 text-2xl font-bold">EXEMPLO</span>
+              <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/40" />
+                <span className="text-white/60 text-xl font-semibold z-10">Em breve</span>
               </div>
               <CardHeader className="pt-6">
                 <div className="flex items-start justify-between">

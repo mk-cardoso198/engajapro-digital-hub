@@ -96,7 +96,7 @@ export default function Header() {
 
           <div className="flex items-center gap-3">
             <RainbowButton className="hidden lg:inline-flex text-white" onClick={() => {
-              document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+              document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }}>
               Contato
             </RainbowButton>
@@ -220,7 +220,7 @@ function MobileNav() {
           </div>
           <div className="pt-4">
             <RainbowButton className="w-full text-white" onClick={() => {
-              document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+              document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }}>
               Contato
             </RainbowButton>

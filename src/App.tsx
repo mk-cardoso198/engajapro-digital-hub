@@ -24,7 +24,6 @@ const App = () => {
           <div className="relative min-h-screen bg-black overflow-x-hidden">
             <div className="fixed inset-0 w-full h-full z-0">
               <Vortex 
-                particleCount={window.innerWidth < 768 ? 300 : 600}
                 baseSpeed={0.0}
                 rangeSpeed={1.5}
                 baseRadius={1}

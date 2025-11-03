@@ -21,7 +21,7 @@ export const Vortex = (props: VortexProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef(null);
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const particleCount = isMobile ? 150 : (props.particleCount || 700);
+  const particleCount = isMobile ? 100 : (props.particleCount || 500);
   const particlePropCount = 9;
   const particlePropsLength = particleCount * particlePropCount;
   const rangeY = props.rangeY || 100;
@@ -203,13 +203,7 @@ export const Vortex = (props: VortexProps) => {
     ctx: CanvasRenderingContext2D
   ) => {
     ctx.save();
-    ctx.filter = "blur(8px) brightness(200%)";
-    ctx.globalCompositeOperation = "lighter";
-    ctx.drawImage(canvas, 0, 0);
-    ctx.restore();
-
-    ctx.save();
-    ctx.filter = "blur(4px) brightness(200%)";
+    ctx.filter = "blur(6px) brightness(200%)";
     ctx.globalCompositeOperation = "lighter";
     ctx.drawImage(canvas, 0, 0);
     ctx.restore();
