@@ -7,9 +7,6 @@ import supercopa from '@/assets/clients/supercopa.png';
 
 const ClientsCarousel = () => {
   const logos = [avenida, bigodes, copaArena, cria, nalaje, supercopa];
-  
-  // Duplicar logos para loop contínuo (usado com translateX(-50%))
-  const allLogos = [...logos, ...logos];
 
   return (
     <section className="w-full py-16 md:py-24 bg-black/50 overflow-hidden">
@@ -18,23 +15,45 @@ const ClientsCarousel = () => {
           Alguns de nossos clientes
         </h2>
         
-        <div className="relative">
-          <div 
-            className="flex gap-8 md:gap-12 lg:gap-16 animate-infinite-scroll"
-            style={{ willChange: 'transform' }}
-          >
-            {allLogos.map((logo, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-32 h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 flex items-center justify-center"
-              >
-                <img
-                  src={logo}
-                  alt={`Cliente ${(index % logos.length) + 1}`}
-                  className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
-            ))}
+        <div className="relative overflow-hidden group">
+          <div className="flex">
+            {/* Track 1 */}
+            <div 
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee [animation-duration:6s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              style={{ willChange: 'transform' }}
+            >
+              {logos.map((logo, index) => (
+                <div
+                  key={`track1-${index}`}
+                  className="flex-shrink-0 w-32 h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 flex items-center justify-center"
+                >
+                  <img
+                    src={logo}
+                    alt={`Cliente ${index + 1}`}
+                    className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+            
+            {/* Track 2 - Identical copy for seamless loop */}
+            <div 
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee [animation-duration:6s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              style={{ willChange: 'transform' }}
+            >
+              {logos.map((logo, index) => (
+                <div
+                  key={`track2-${index}`}
+                  className="flex-shrink-0 w-32 h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 flex items-center justify-center"
+                >
+                  <img
+                    src={logo}
+                    alt={`Cliente ${index + 1}`}
+                    className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
