@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Vortex } from "@/components/ui/vortex";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +38,8 @@ const App = () => {
             <div className="relative z-10">
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/admin-login" element={<AdminLogin />} />
+                <Route path="/admengajado" element={<AdminDashboard />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
