@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExternalLink } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -95,10 +96,10 @@ export default function ProjectsSection() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {projects.map((project, index) => (
-            <Card 
-              key={project.id}
-              className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
-            >
+            <Link key={project.id} to={`/projeto/${project.id}`}>
+              <Card 
+                className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden cursor-pointer"
+              >
               <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden">
                 {project.cover_image ? (
                   <img 
@@ -134,6 +135,7 @@ export default function ProjectsSection() {
                 </div>
               </CardContent>
             </Card>
+            </Link>
             ))}
           </div>
         )}

@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import ProjectDetail from "./pages/ProjectDetail";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => {
             <div className="relative z-10">
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/projeto/:id" element={<ProjectDetail />} />
                 <Route path="/admin-login" element={<AdminLogin />} />
                 <Route path="/admengajado" element={<AdminDashboard />} />
                 <Route path="*" element={<NotFound />} />
