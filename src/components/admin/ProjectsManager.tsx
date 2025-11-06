@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Plus, Pencil, Trash2, Archive, ArchiveRestore } from 'lucide-react';
+import { Plus, Pencil, Trash2, Archive, ArchiveRestore, Eye, EyeOff } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import ProjectDialog from './ProjectDialog';
 
@@ -12,6 +12,13 @@ type Project = {
   category: string;
   results: string;
   archived: boolean;
+  cover_image?: string;
+  gallery_images?: string[];
+  project_url?: string;
+  tags?: string[];
+  client_name?: string;
+  completion_date?: string;
+  highlight_color?: string;
 };
 
 export default function ProjectsManager() {
@@ -110,56 +117,85 @@ export default function ProjectsManager() {
         </Button>
       </div>
 
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <div
             key={project.id}
-            className={`bg-gray-900/50 border border-white/10 rounded-xl p-6 ${
+            className={`group relative bg-gray-900/50 border border-white/10 rounded-xl overflow-hidden transition-all hover:border-white/30 hover:shadow-xl ${
               project.archived ? 'opacity-60' : ''
             }`}
           >
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-2">
+            {/* Cover Image */}
+            <div className="aspect-video w-full overflow-hidden bg-gray-800">
+              {project.cover_image ? (
+                <img
+                  src={project.cover_image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-white/30">
+                  Sem imagem
+                </div>
+              )}
+            </div>
+
+            {/* Content */}
+            <div className="p-4 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <h3 className="text-lg font-semibold text-white line-clamp-1">
                   {project.title}
                   {project.archived && (
-                    <span className="ml-2 text-sm text-yellow-500">(Arquivado)</span>
+                    <span className="ml-2 text-xs text-yellow-500">(Arquivado)</span>
                   )}
                 </h3>
-                <p className="text-white/70 text-sm mb-2">{project.category}</p>
-                <p className="text-white/90">{project.description}</p>
-                <p className="text-white/70 mt-2 text-sm">
-                  <strong>Resultados:</strong> {project.results}
-                </p>
+                <span className="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full whitespace-nowrap">
+                  {project.category}
+                </span>
               </div>
-              <div className="flex gap-2">
+
+              <p className="text-white/70 text-sm line-clamp-2">{project.description}</p>
+
+              {project.client_name && (
+                <p className="text-white/50 text-xs">Cliente: {project.client_name}</p>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 pt-2">
                 <Button
-                  size="icon"
+                  size="sm"
                   variant="outline"
                   onClick={() => handleEdit(project)}
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
-                  <Pencil className="h-4 w-4" />
+                  <Pencil className="h-3 w-3 mr-1" />
+                  Editar
                 </Button>
                 <Button
-                  size="icon"
+                  size="sm"
                   variant="outline"
                   onClick={() => handleArchive(project)}
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
                   {project.archived ? (
-                    <ArchiveRestore className="h-4 w-4" />
+                    <>
+                      <Eye className="h-3 w-3 mr-1" />
+                      Ativar
+                    </>
                   ) : (
-                    <Archive className="h-4 w-4" />
+                    <>
+                      <EyeOff className="h-3 w-3 mr-1" />
+                      Arquivar
+                    </>
                   )}
                 </Button>
                 <Button
-                  size="icon"
+                  size="sm"
                   variant="outline"
                   onClick={() => handleDelete(project.id)}
                   className="bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500/20"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-3 w-3" />
                 </Button>
               </div>
             </div>
@@ -167,7 +203,7 @@ export default function ProjectsManager() {
         ))}
 
         {projects.length === 0 && (
-          <div className="text-center py-12 text-white/70">
+          <div className="col-span-full text-center py-12 text-white/70">
             Nenhum projeto cadastrado. Clique em "Novo Projeto" para começar.
           </div>
         )}

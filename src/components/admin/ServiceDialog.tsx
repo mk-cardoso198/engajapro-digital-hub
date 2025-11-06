@@ -11,13 +11,16 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
+import ImageUpload from './ImageUpload';
 
 type Service = {
   id: string;
   title: string;
-  description: string;
+  short_description: string;
+  long_description: string;
   back_image: string;
   front_image: string;
+  icon_image?: string;
   display_order: number;
   active: boolean;
 };
@@ -37,10 +40,12 @@ export default function ServiceDialog({
 }: ServiceDialogProps) {
   const [formData, setFormData] = useState({
     title: '',
-    description: '',
+    short_description: '',
+    long_description: '',
     back_image: '',
     front_image: '',
-    display_order: 0,
+    icon_image: '',
+    display_order: 1,
   });
   const [loading, setLoading] = useState(false);
 
@@ -48,32 +53,50 @@ export default function ServiceDialog({
     if (service) {
       setFormData({
         title: service.title,
-        description: service.description,
+        short_description: service.short_description,
+        long_description: service.long_description,
         back_image: service.back_image,
         front_image: service.front_image,
+        icon_image: service.icon_image || '',
         display_order: service.display_order,
       });
     } else {
       setFormData({
         title: '',
-        description: '',
+        short_description: '',
+        long_description: '',
         back_image: '',
         front_image: '',
-        display_order: 0,
+        icon_image: '',
+        display_order: 1,
       });
     }
   }, [service]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.back_image || !formData.front_image) {
+      toast({
+        title: 'Imagens obrigatórias',
+        description: 'Por favor, faça upload das imagens de fundo e frontal',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
+      const dataToSave = {
+        ...formData,
+        icon_image: formData.icon_image || null,
+      };
+
       if (service) {
-        // Update existing service
         const { error } = await supabase
           .from('services')
-          .update(formData)
+          .update(dataToSave)
           .eq('id', service.id);
 
         if (error) throw error;
@@ -83,10 +106,9 @@ export default function ServiceDialog({
           description: 'As alterações foram salvas com sucesso',
         });
       } else {
-        // Create new service
         const { error } = await supabase
           .from('services')
-          .insert([{ ...formData, active: true }]);
+          .insert([dataToSave]);
 
         if (error) throw error;
 
@@ -111,7 +133,7 @@ export default function ServiceDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl bg-gray-900 border-gray-800 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-3xl bg-gray-900 border-gray-800 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-white">
             {service ? 'Editar Serviço' : 'Novo Serviço'}
@@ -131,51 +153,77 @@ export default function ServiceDialog({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description" className="text-white">Descrição</Label>
-            <Textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              required
-              rows={4}
-              className="bg-gray-800/50 border-white/20 text-white"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="back_image" className="text-white">URL Imagem de Fundo</Label>
-            <Input
-              id="back_image"
-              type="url"
-              value={formData.back_image}
-              onChange={(e) => setFormData({ ...formData, back_image: e.target.value })}
-              required
-              className="bg-gray-800/50 border-white/20 text-white"
-              placeholder="https://..."
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="front_image" className="text-white">URL Imagem Frontal</Label>
-            <Input
-              id="front_image"
-              type="url"
-              value={formData.front_image}
-              onChange={(e) => setFormData({ ...formData, front_image: e.target.value })}
-              required
-              className="bg-gray-800/50 border-white/20 text-white"
-              placeholder="https://..."
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="display_order" className="text-white">Ordem de Exibição</Label>
+            <Label htmlFor="display_order" className="text-white">
+              Posição (ordem de exibição)
+            </Label>
             <Input
               id="display_order"
               type="number"
+              min="1"
               value={formData.display_order}
               onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) })}
               required
+              className="bg-gray-800/50 border-white/20 text-white"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-white">Imagem de Fundo *</Label>
+              <ImageUpload
+                bucket="service-images"
+                currentImage={formData.back_image}
+                onUploadComplete={(url) => setFormData({ ...formData, back_image: url })}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-white">Imagem Frontal *</Label>
+              <ImageUpload
+                bucket="service-images"
+                currentImage={formData.front_image}
+                onUploadComplete={(url) => setFormData({ ...formData, front_image: url })}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-white">Ícone do Serviço (opcional)</Label>
+            <ImageUpload
+              bucket="service-images"
+              currentImage={formData.icon_image}
+              onUploadComplete={(url) => setFormData({ ...formData, icon_image: url })}
+              accept="image/png,image/svg+xml,image/jpeg"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="short_description" className="text-white">
+              Descrição Curta (máx. 50 caracteres)
+            </Label>
+            <Input
+              id="short_description"
+              value={formData.short_description}
+              onChange={(e) => setFormData({ ...formData, short_description: e.target.value.slice(0, 50) })}
+              required
+              maxLength={50}
+              placeholder="Descrição breve para o card"
+              className="bg-gray-800/50 border-white/20 text-white"
+            />
+            <p className="text-xs text-white/50">{formData.short_description.length}/50 caracteres</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="long_description" className="text-white">
+              Descrição Completa
+            </Label>
+            <Textarea
+              id="long_description"
+              value={formData.long_description}
+              onChange={(e) => setFormData({ ...formData, long_description: e.target.value })}
+              required
+              rows={6}
+              placeholder="Descrição detalhada do serviço"
               className="bg-gray-800/50 border-white/20 text-white"
             />
           </div>

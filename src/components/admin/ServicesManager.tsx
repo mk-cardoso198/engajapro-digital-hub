@@ -8,9 +8,11 @@ import ServiceDialog from './ServiceDialog';
 type Service = {
   id: string;
   title: string;
-  description: string;
+  short_description: string;
+  long_description: string;
   back_image: string;
   front_image: string;
+  icon_image?: string;
   display_order: number;
   active: boolean;
 };
@@ -111,67 +113,95 @@ export default function ServicesManager() {
         </Button>
       </div>
 
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service) => (
           <div
             key={service.id}
-            className={`bg-gray-900/50 border border-white/10 rounded-xl p-6 ${
+            className={`group relative bg-gray-900/50 border border-white/10 rounded-xl overflow-hidden transition-all hover:border-white/30 hover:shadow-xl ${
               !service.active ? 'opacity-60' : ''
             }`}
           >
-            <div className="flex gap-4">
-              <div className="flex gap-2 flex-shrink-0">
+            {/* Images Grid */}
+            <div className="grid grid-cols-2 gap-1 aspect-square bg-gray-800">
+              <div className="col-span-2 overflow-hidden">
                 <img
                   src={service.back_image}
-                  alt={`${service.title} back`}
-                  className="w-20 h-20 rounded-lg object-cover"
+                  alt={`${service.title} - back`}
+                  className="w-full h-full object-cover"
                 />
+              </div>
+              <div className="overflow-hidden">
                 <img
                   src={service.front_image}
-                  alt={`${service.title} front`}
-                  className="w-20 h-20 rounded-lg object-cover"
+                  alt={`${service.title} - front`}
+                  className="w-full h-full object-cover"
                 />
               </div>
+              {service.icon_image && (
+                <div className="overflow-hidden flex items-center justify-center bg-gray-900">
+                  <img
+                    src={service.icon_image}
+                    alt={`${service.title} - icon`}
+                    className="w-12 h-12 object-contain"
+                  />
+                </div>
+              )}
+            </div>
 
-              <div className="flex-grow">
-                <h3 className="text-xl font-semibold text-white mb-2">
+            {/* Content */}
+            <div className="p-4 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <h3 className="text-lg font-semibold text-white line-clamp-1">
                   {service.title}
                   {!service.active && (
-                    <span className="ml-2 text-sm text-yellow-500">(Inativo)</span>
+                    <span className="ml-2 text-xs text-yellow-500">(Inativo)</span>
                   )}
                 </h3>
-                <p className="text-white/90 text-sm line-clamp-2">{service.description}</p>
-                <p className="text-white/70 text-xs mt-2">Ordem: {service.display_order}</p>
+                <span className="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full whitespace-nowrap">
+                  #{service.display_order}
+                </span>
               </div>
 
-              <div className="flex gap-2 flex-shrink-0">
+              <p className="text-white/70 text-sm line-clamp-2">
+                {service.short_description || service.long_description}
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 pt-2">
                 <Button
-                  size="icon"
+                  size="sm"
                   variant="outline"
                   onClick={() => handleEdit(service)}
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
-                  <Pencil className="h-4 w-4" />
+                  <Pencil className="h-3 w-3 mr-1" />
+                  Editar
                 </Button>
                 <Button
-                  size="icon"
+                  size="sm"
                   variant="outline"
                   onClick={() => handleToggleActive(service)}
-                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20"
                 >
                   {service.active ? (
-                    <EyeOff className="h-4 w-4" />
+                    <>
+                      <EyeOff className="h-3 w-3 mr-1" />
+                      Ocultar
+                    </>
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <>
+                      <Eye className="h-3 w-3 mr-1" />
+                      Ativar
+                    </>
                   )}
                 </Button>
                 <Button
-                  size="icon"
+                  size="sm"
                   variant="outline"
                   onClick={() => handleDelete(service.id)}
                   className="bg-red-500/10 border-red-500/20 text-red-500 hover:bg-red-500/20"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-3 w-3" />
                 </Button>
               </div>
             </div>
@@ -179,7 +209,7 @@ export default function ServicesManager() {
         ))}
 
         {services.length === 0 && (
-          <div className="text-center py-12 text-white/70">
+          <div className="col-span-full text-center py-12 text-white/70">
             Nenhum serviço cadastrado. Clique em "Novo Serviço" para começar.
           </div>
         )}

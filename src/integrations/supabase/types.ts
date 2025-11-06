@@ -18,30 +18,51 @@ export type Database = {
         Row: {
           archived: boolean | null
           category: string
+          client_name: string | null
+          completion_date: string | null
+          cover_image: string | null
           created_at: string | null
           description: string
+          gallery_images: string[] | null
+          highlight_color: string | null
           id: string
+          project_url: string | null
           results: string
+          tags: string[] | null
           title: string
           updated_at: string | null
         }
         Insert: {
           archived?: boolean | null
           category: string
+          client_name?: string | null
+          completion_date?: string | null
+          cover_image?: string | null
           created_at?: string | null
           description: string
+          gallery_images?: string[] | null
+          highlight_color?: string | null
           id?: string
+          project_url?: string | null
           results: string
+          tags?: string[] | null
           title: string
           updated_at?: string | null
         }
         Update: {
           archived?: boolean | null
           category?: string
+          client_name?: string | null
+          completion_date?: string | null
+          cover_image?: string | null
           created_at?: string | null
           description?: string
+          gallery_images?: string[] | null
+          highlight_color?: string | null
           id?: string
+          project_url?: string | null
           results?: string
+          tags?: string[] | null
           title?: string
           updated_at?: string | null
         }
@@ -52,10 +73,12 @@ export type Database = {
           active: boolean | null
           back_image: string
           created_at: string | null
-          description: string
           display_order: number
           front_image: string
+          icon_image: string | null
           id: string
+          long_description: string | null
+          short_description: string | null
           title: string
           updated_at: string | null
         }
@@ -63,10 +86,12 @@ export type Database = {
           active?: boolean | null
           back_image: string
           created_at?: string | null
-          description: string
           display_order?: number
           front_image: string
+          icon_image?: string | null
           id?: string
+          long_description?: string | null
+          short_description?: string | null
           title: string
           updated_at?: string | null
         }
@@ -74,10 +99,12 @@ export type Database = {
           active?: boolean | null
           back_image?: string
           created_at?: string | null
-          description?: string
           display_order?: number
           front_image?: string
+          icon_image?: string | null
           id?: string
+          long_description?: string | null
+          short_description?: string | null
           title?: string
           updated_at?: string | null
         }

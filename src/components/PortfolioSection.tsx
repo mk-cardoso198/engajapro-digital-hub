@@ -15,9 +15,11 @@ import { toast } from '@/hooks/use-toast';
 type Service = {
   id: string;
   title: string;
-  description: string;
+  short_description: string;
+  long_description: string;
   back_image: string;
   front_image: string;
+  icon_image?: string;
   display_order: number;
   active: boolean;
 };
@@ -221,7 +223,7 @@ export default function PortfolioSection() {
               {selectedService?.title}
             </DialogTitle>
             <DialogDescription className="text-white/70 text-base leading-relaxed mt-4">
-              {selectedService?.description}
+              {selectedService?.long_description}
             </DialogDescription>
           </DialogHeader>
           <div className="flex gap-4 mt-4">
