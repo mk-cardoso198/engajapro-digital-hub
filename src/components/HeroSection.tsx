@@ -66,7 +66,7 @@ export default function HeroSection() {
             <a href="#projetos">Portfólio</a>
           </Button>
           <RainbowButton className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 text-white" onClick={() => {
-            document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.open('https://wa.me/5513998028736?text=Ol%C3%A1%2C%20quero%20alavancar%20com%20a%20Engaja%20Pro%21', '_blank');
           }}>
             Alavancar Agora
           </RainbowButton>

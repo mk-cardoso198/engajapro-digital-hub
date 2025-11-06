@@ -1,46 +1,73 @@
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ExternalLink } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 
-const projects = [
-  {
-    title: 'Avenida F.C.',
-    description: 'Gestão completa de redes sociais e criação de conteúdo estratégico para time de futebol.',
-    category: 'Gestão de Redes Sociais',
-    results: '+450% Engajamento'
-  },
-  {
-    title: 'Copa Arena Futsal',
-    description: 'Campanha de tráfego pago e produção de conteúdo para torneios de futsal.',
-    category: 'Tráfego Pago',
-    results: '8x ROAS'
-  },
-  {
-    title: 'Bigodes FC',
-    description: 'Branding completo e estratégia de marketing de influência.',
-    category: 'Marketing de Influência',
-    results: '+2.5M Alcance'
-  },
-  {
-    title: 'Nalaje',
-    description: 'Produção de conteúdo audiovisual e gestão de campanhas digitais.',
-    category: 'Produção de Conteúdo',
-    results: '+300 Projetos'
-  },
-  {
-    title: 'Super Copa Itanhaém',
-    description: 'Consultoria estratégica e analytics para evento esportivo regional.',
-    category: 'Consultoria',
-    results: '+180 Inscritos'
-  },
-  {
-    title: 'CRIA',
-    description: 'Estratégia digital completa e automação de marketing.',
-    category: 'Analytics & Automation',
-    results: '+220% Conversões'
-  },
-];
+type Project = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  results: string;
+  archived: boolean;
+};
 
 export default function ProjectsSection() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadProjects = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('archived', false)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProjects(data || []);
+    } catch (error: any) {
+      toast({
+        title: 'Erro ao carregar projetos',
+        description: error.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProjects();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('projects-changes')
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'projects'
+      }, () => {
+        loadProjects();
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="projetos" className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-black to-blue-950/20">
+        <div className="container mx-auto px-4 text-center text-white">
+          <p>Carregando projetos...</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="projetos" className="py-12 md:py-20 lg:py-32 bg-gradient-to-b from-black to-blue-950/20">
       <div className="container mx-auto px-4">
@@ -53,10 +80,15 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {projects.map((project, index) => (
+        {projects.length === 0 ? (
+          <div className="text-center text-white/70">
+            <p>Nenhum projeto disponível no momento.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {projects.map((project, index) => (
             <Card 
-              key={index}
+              key={project.id}
               className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
             >
               <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden">
@@ -84,8 +116,9 @@ export default function ProjectsSection() {
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

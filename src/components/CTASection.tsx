@@ -16,7 +16,7 @@ export default function CTASection() {
             
             <button
               className="inline-flex items-center justify-center gap-2 text-base md:text-lg px-6 md:px-8 py-4 md:py-5 text-white font-semibold shadow-2xl hover:scale-105 transition-transform rounded-xl bg-green-600 hover:bg-green-500 border-2 border-green-500"
-              onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
+              onClick={() => window.open('https://wa.me/5513998028736?text=Ol%C3%A1%2C%20quero%20alavancar%20com%20a%20Engaja%20Pro%21', '_blank')}
             >
               <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
               Falar com um Especialista
