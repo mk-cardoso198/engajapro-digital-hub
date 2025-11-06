@@ -28,6 +28,7 @@ type Project = {
   client_name?: string;
   completion_date?: string;
   highlight_color?: string;
+  display_order?: number;
 };
 
 type ProjectDialogProps = {
@@ -55,6 +56,7 @@ export default function ProjectDialog({
     client_name: '',
     completion_date: '',
     highlight_color: '#3b82f6',
+    display_order: 0,
   });
   const [tagInput, setTagInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -73,6 +75,7 @@ export default function ProjectDialog({
         client_name: project.client_name || '',
         completion_date: project.completion_date || '',
         highlight_color: project.highlight_color || '#3b82f6',
+        display_order: project.display_order || 0,
       });
     } else {
       setFormData({
@@ -87,6 +90,7 @@ export default function ProjectDialog({
         client_name: '',
         completion_date: '',
         highlight_color: '#3b82f6',
+        display_order: 0,
       });
     }
   }, [project]);
@@ -176,7 +180,7 @@ export default function ProjectDialog({
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label htmlFor="title" className="text-white">Título *</Label>
               <Input
@@ -195,6 +199,18 @@ export default function ProjectDialog({
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 required
+                className="bg-gray-800/50 border-white/20 text-white"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="display_order" className="text-white">Posição de Exibição</Label>
+              <Input
+                id="display_order"
+                type="number"
+                min="0"
+                value={formData.display_order}
+                onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
                 className="bg-gray-800/50 border-white/20 text-white"
               />
             </div>

@@ -23,6 +23,7 @@ export type Database = {
           cover_image: string | null
           created_at: string | null
           description: string
+          display_order: number | null
           gallery_images: string[] | null
           highlight_color: string | null
           id: string
@@ -40,6 +41,7 @@ export type Database = {
           cover_image?: string | null
           created_at?: string | null
           description: string
+          display_order?: number | null
           gallery_images?: string[] | null
           highlight_color?: string | null
           id?: string
@@ -57,6 +59,7 @@ export type Database = {
           cover_image?: string | null
           created_at?: string | null
           description?: string
+          display_order?: number | null
           gallery_images?: string[] | null
           highlight_color?: string | null
           id?: string

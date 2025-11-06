@@ -11,6 +11,14 @@ type Project = {
   category: string;
   results: string;
   archived: boolean;
+  cover_image: string | null;
+  gallery_images: string[] | null;
+  project_url: string | null;
+  tags: string[] | null;
+  client_name: string | null;
+  completion_date: string | null;
+  highlight_color: string | null;
+  display_order: number;
 };
 
 export default function ProjectsSection() {
@@ -23,7 +31,7 @@ export default function ProjectsSection() {
         .from('projects')
         .select('*')
         .eq('archived', false)
-        .order('created_at', { ascending: false });
+        .order('display_order', { ascending: true });
 
       if (error) throw error;
       setProjects(data || []);
@@ -92,8 +100,18 @@ export default function ProjectsSection() {
               className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden"
             >
               <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/40" />
-                <span className="text-white/60 text-xl font-semibold z-10">Em breve</span>
+                {project.cover_image ? (
+                  <img 
+                    src={project.cover_image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-black/40" />
+                    <span className="text-white/60 text-xl font-semibold z-10">Em breve</span>
+                  </>
+                )}
               </div>
               <CardHeader className="pt-6">
                 <div className="flex items-start justify-between">
