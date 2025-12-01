@@ -15,7 +15,8 @@ const ClientsCarousel = () => {
           Alguns de nossos clientes
         </h2>
         
-        <div className="relative overflow-hidden group">
+        {/* First Carousel - Moving Left */}
+        <div className="relative overflow-hidden group mb-8">
           <div className="flex">
             {/* Track 1 */}
             <div 
@@ -44,6 +45,49 @@ const ClientsCarousel = () => {
               {logos.map((logo, index) => (
                 <div
                   key={`track2-${index}`}
+                  className="flex-shrink-0 w-32 h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 flex items-center justify-center"
+                >
+                  <img
+                    src={logo}
+                    alt={`Cliente ${index + 1}`}
+                    className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Second Carousel - Moving Right (Reverse) */}
+        <div className="relative overflow-hidden group">
+          <div className="flex">
+            {/* Track 1 - Reverse */}
+            <div 
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee-reverse [animation-duration:8s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              style={{ willChange: 'transform' }}
+            >
+              {[...logos].reverse().map((logo, index) => (
+                <div
+                  key={`track1-reverse-${index}`}
+                  className="flex-shrink-0 w-32 h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 flex items-center justify-center"
+                >
+                  <img
+                    src={logo}
+                    alt={`Cliente ${index + 1}`}
+                    className="max-w-full max-h-full object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+            
+            {/* Track 2 - Identical copy for seamless loop (Reverse) */}
+            <div 
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee-reverse [animation-duration:8s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              style={{ willChange: 'transform' }}
+            >
+              {[...logos].reverse().map((logo, index) => (
+                <div
+                  key={`track2-reverse-${index}`}
                   className="flex-shrink-0 w-32 h-20 md:w-40 md:h-24 lg:w-48 lg:h-28 flex items-center justify-center"
                 >
                   <img

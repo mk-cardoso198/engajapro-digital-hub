@@ -16,11 +16,11 @@ import ImageUpload from './ImageUpload';
 type Service = {
   id: string;
   title: string;
-  short_description: string;
-  long_description: string;
+  short_description: string | null;
+  long_description: string | null;
   back_image: string;
   front_image: string;
-  icon_image?: string;
+  icon_image?: string | null;
   display_order: number;
   active: boolean;
 };
@@ -53,8 +53,8 @@ export default function ServiceDialog({
     if (service) {
       setFormData({
         title: service.title,
-        short_description: service.short_description,
-        long_description: service.long_description,
+        short_description: service.short_description || '',
+        long_description: service.long_description || '',
         back_image: service.back_image,
         front_image: service.front_image,
         icon_image: service.icon_image || '',

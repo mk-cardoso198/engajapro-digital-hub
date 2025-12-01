@@ -8,11 +8,11 @@ import ServiceDialog from './ServiceDialog';
 type Service = {
   id: string;
   title: string;
-  short_description: string;
-  long_description: string;
+  short_description: string | null;
+  long_description: string | null;
   back_image: string;
   front_image: string;
-  icon_image?: string;
+  icon_image?: string | null;
   display_order: number;
   active: boolean;
 };
@@ -163,7 +163,7 @@ export default function ServicesManager() {
               </div>
 
               <p className="text-white/70 text-sm line-clamp-2">
-                {service.short_description || service.long_description}
+                {service.short_description || service.long_description || 'Sem descrição'}
               </p>
 
               {/* Action Buttons */}

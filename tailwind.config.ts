@@ -92,6 +92,10 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-100%)" },
         },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -99,6 +103,7 @@ export default {
         rainbow: "rainbow 8s ease-in-out infinite",
         "infinite-scroll": "infinite-scroll 8s linear infinite",
         marquee: "marquee 7s linear infinite",
+        "marquee-reverse": "marquee-reverse 7s linear infinite",
       },
     },
   },
