@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      clients: {
+        Row: {
+          active: boolean | null
+          created_at: string
+          display_order: number
+          id: string
+          logo_url: string
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          logo_url: string
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          logo_url?: string
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           archived: boolean | null

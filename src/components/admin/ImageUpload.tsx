@@ -5,7 +5,7 @@ import { Upload, X, Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 type ImageUploadProps = {
-  bucket: 'project-images' | 'service-images';
+  bucket: 'project-images' | 'service-images' | 'client-logos';
   onUploadComplete: (url: string) => void;
   currentImage?: string;
   accept?: string;

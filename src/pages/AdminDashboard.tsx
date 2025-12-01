@@ -7,6 +7,7 @@ import { LogOut } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import ProjectsManager from '@/components/admin/ProjectsManager';
 import ServicesManager from '@/components/admin/ServicesManager';
+import ClientsManager from '@/components/admin/ClientsManager';
 import logoEngaja from '@/assets/logo-engaja-pro-white.png';
 
 export default function AdminDashboard() {
@@ -96,6 +97,9 @@ export default function AdminDashboard() {
             <TabsTrigger value="services" className="data-[state=active]:bg-blue-600">
               Serviços
             </TabsTrigger>
+            <TabsTrigger value="clients" className="data-[state=active]:bg-blue-600">
+              Clientes
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="projects">
@@ -104,6 +108,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="services">
             <ServicesManager />
+          </TabsContent>
+
+          <TabsContent value="clients">
+            <ClientsManager />
           </TabsContent>
         </Tabs>
       </main>
