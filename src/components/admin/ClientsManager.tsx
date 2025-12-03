@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Plus, Pencil, Trash2, Eye, EyeOff } from 'lucide-react';
+import { Plus, Pencil, Trash2, Eye, EyeOff, Monitor } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import ClientDialog from './ClientDialog';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 type Client = {
   id: string;
@@ -18,6 +20,7 @@ export default function ClientsManager() {
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingClient, setEditingClient] = useState<Client | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     loadClients();
@@ -99,6 +102,8 @@ export default function ClientsManager() {
     return <div className="text-foreground">Carregando clientes...</div>;
   }
 
+  const activeClients = clients.filter(c => c.active);
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -108,11 +113,73 @@ export default function ClientsManager() {
             Logos exibidos na seção "Alguns de nossos clientes"
           </p>
         </div>
-        <Button onClick={handleAdd} className="bg-primary hover:bg-primary/90">
-          <Plus className="h-4 w-4 mr-2" />
-          Novo Cliente
-        </Button>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Switch
+              id="preview-mode"
+              checked={showPreview}
+              onCheckedChange={setShowPreview}
+            />
+            <Label htmlFor="preview-mode" className="text-foreground flex items-center gap-2 cursor-pointer">
+              <Monitor className="h-4 w-4" />
+              Preview
+            </Label>
+          </div>
+          <Button onClick={handleAdd} className="bg-primary hover:bg-primary/90">
+            <Plus className="h-4 w-4 mr-2" />
+            Novo Cliente
+          </Button>
+        </div>
       </div>
+
+      {/* Preview do Carrossel */}
+      {showPreview && (
+        <div className="bg-black/50 rounded-xl p-6 border border-border">
+          <h3 className="text-foreground text-sm font-medium mb-4 text-center">
+            Preview - Como aparece na página inicial
+          </h3>
+          <div className="overflow-hidden">
+            {activeClients.length > 0 ? (
+              <div className="space-y-4">
+                {/* Carrossel 1 - Esquerda */}
+                <div className="flex animate-marquee gap-8">
+                  {[...activeClients, ...activeClients].map((client, index) => (
+                    <div
+                      key={`preview-1-${client.id}-${index}`}
+                      className="flex-shrink-0 w-24 h-16 bg-gray-800/50 rounded-lg flex items-center justify-center p-2"
+                    >
+                      <img
+                        src={client.logo_url}
+                        alt={client.name}
+                        className="max-w-full max-h-full object-contain opacity-70"
+                      />
+                    </div>
+                  ))}
+                </div>
+                {/* Carrossel 2 - Direita */}
+                <div className="flex animate-marquee-reverse gap-8">
+                  {[...activeClients, ...activeClients].map((client, index) => (
+                    <div
+                      key={`preview-2-${client.id}-${index}`}
+                      className="flex-shrink-0 w-24 h-16 bg-gray-800/50 rounded-lg flex items-center justify-center p-2"
+                    >
+                      <img
+                        src={client.logo_url}
+                        alt={client.name}
+                        className="max-w-full max-h-full object-contain opacity-70"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p className="text-muted-foreground text-center py-4">
+                Nenhum cliente ativo para exibir no preview
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         {clients.map((client) => (
