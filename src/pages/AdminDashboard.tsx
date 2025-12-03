@@ -8,6 +8,7 @@ import { toast } from '@/hooks/use-toast';
 import ProjectsManager from '@/components/admin/ProjectsManager';
 import ServicesManager from '@/components/admin/ServicesManager';
 import ClientsManager from '@/components/admin/ClientsManager';
+import { GenerateServiceImages } from '@/components/admin/GenerateServiceImages';
 import logoEngaja from '@/assets/logo-engaja-pro-white.png';
 
 export default function AdminDashboard() {
@@ -107,7 +108,10 @@ export default function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="services">
-            <ServicesManager />
+            <div className="space-y-6">
+              <GenerateServiceImages />
+              <ServicesManager />
+            </div>
           </TabsContent>
 
           <TabsContent value="clients">
