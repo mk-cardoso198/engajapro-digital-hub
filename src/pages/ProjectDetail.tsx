@@ -50,7 +50,7 @@ export default function ProjectDetail() {
         .from("projects")
         .select("*")
         .eq("id", id)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error("Erro ao buscar projeto:", error);
@@ -77,7 +77,7 @@ export default function ProjectDetail() {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-6 px-4">
         <h2 className="text-2xl md:text-3xl font-bold text-center">Projeto não encontrado</h2>
-        <Link to="/#portfolio">
+        <Link to="/#projetos">
           <Button>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar ao Portfólio
@@ -89,7 +89,7 @@ export default function ProjectDetail() {
 
   const allImages = [project.cover_image, ...(project.gallery_images || [])].filter(Boolean);
   const whatsappMessage = `Olá! Vi o projeto ${project.title} e gostaria de solicitar um orçamento para algo similar.`;
-  const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappUrl = `https://wa.me/5513998028736?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,7 +100,7 @@ export default function ProjectDetail() {
         className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60"
       >
         <div className="container flex h-14 md:h-16 items-center px-4">
-          <Link to="/#portfolio">
+          <Link to="/#projetos">
             <Button variant="ghost" size="sm" className="gap-2">
               <ArrowLeft className="h-4 w-4" />
               <span className="hidden sm:inline">Voltar</span>
@@ -131,7 +131,7 @@ export default function ProjectDetail() {
             </BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link to="/#portfolio" className="text-muted-foreground hover:text-foreground">
+                <Link to="/#projetos" className="text-muted-foreground hover:text-foreground">
                   Portfólio
                 </Link>
               </BreadcrumbLink>
