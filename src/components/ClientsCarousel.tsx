@@ -96,7 +96,7 @@ const ClientsCarousel = () => {
           <div className="flex">
             {/* Track 1 */}
             <div 
-              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee [animation-duration:6s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee [animation-duration:20s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
               style={{ willChange: 'transform' }}
             >
               {clients.map((client, index) => (
@@ -115,7 +115,7 @@ const ClientsCarousel = () => {
             
             {/* Track 2 - Identical copy for seamless loop */}
             <div 
-              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee [animation-duration:6s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee [animation-duration:20s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
               style={{ willChange: 'transform' }}
             >
               {clients.map((client, index) => (
@@ -139,7 +139,7 @@ const ClientsCarousel = () => {
           <div className="flex">
             {/* Track 1 - Reverse */}
             <div 
-              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee-reverse [animation-duration:8s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee-reverse [animation-duration:25s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
               style={{ willChange: 'transform' }}
             >
               {[...clients].reverse().map((client, index) => (
@@ -158,7 +158,7 @@ const ClientsCarousel = () => {
             
             {/* Track 2 - Identical copy for seamless loop (Reverse) */}
             <div 
-              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee-reverse [animation-duration:8s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
+              className="flex gap-8 md:gap-12 lg:gap-16 shrink-0 animate-marquee-reverse [animation-duration:25s] group-hover:[animation-play-state:paused] motion-reduce:animate-none"
               style={{ willChange: 'transform' }}
             >
               {[...clients].reverse().map((client, index) => (
