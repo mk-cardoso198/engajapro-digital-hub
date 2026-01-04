@@ -107,9 +107,15 @@ export default function ProjectDialog({
   };
 
   const handleAddGalleryImage = (url: string) => {
-    if (formData.gallery_images.length < 5) {
-      setFormData({ ...formData, gallery_images: [...formData.gallery_images, url] });
-    }
+    if (!url) return;
+
+    setFormData((prev) => {
+      if (prev.gallery_images.length >= 5) return prev;
+      return {
+        ...prev,
+        gallery_images: [...prev.gallery_images, url].slice(0, 5),
+      };
+    });
   };
 
   const handleRemoveGalleryImage = (index: number) => {
@@ -281,6 +287,10 @@ export default function ProjectDialog({
                 <ImageUpload
                   bucket="project-images"
                   onUploadComplete={handleAddGalleryImage}
+                  multiple
+                  showPreview={false}
+                  resetAfterUpload
+                  maxFiles={5 - formData.gallery_images.length}
                 />
                 <p className="text-xs text-muted-foreground mt-1">
                   Você pode adicionar até {5 - formData.gallery_images.length} imagens

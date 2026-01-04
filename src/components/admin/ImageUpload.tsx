@@ -10,6 +10,14 @@ type ImageUploadProps = {
   currentImage?: string;
   accept?: string;
   maxSizeMB?: number;
+  /** Permite selecionar múltiplas imagens de uma vez */
+  multiple?: boolean;
+  /** Limita quantos arquivos podem ser selecionados nessa seleção */
+  maxFiles?: number;
+  /** Após enviar, limpa o input/preview para permitir adicionar outra imagem facilmente */
+  resetAfterUpload?: boolean;
+  /** Exibir preview interno do uploader (útil para imagem única). Para galeria, use false. */
+  showPreview?: boolean;
 };
 
 export default function ImageUpload({
@@ -18,9 +26,15 @@ export default function ImageUpload({
   currentImage,
   accept = 'image/jpeg,image/png,image/webp',
   maxSizeMB = 5,
+  multiple = false,
+  maxFiles,
+  resetAfterUpload = false,
+  showPreview = true,
 }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
-  const [preview, setPreview] = useState<string | null>(currentImage || null);
+  const [preview, setPreview] = useState<string | null>(() =>
+    showPreview ? (currentImage || null) : null
+  );
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const compressImage = async (file: File): Promise<File> => {
@@ -73,54 +87,85 @@ export default function ImageUpload({
   };
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0) return;
 
-    // Check file size
-    const fileSizeMB = file.size / 1024 / 1024;
-    if (fileSizeMB > maxSizeMB) {
+    const allowed = typeof maxFiles === 'number' ? Math.max(0, maxFiles) : undefined;
+    const selectedFiles = allowed !== undefined ? files.slice(0, allowed) : files;
+
+    if (allowed !== undefined && files.length > allowed) {
       toast({
-        title: 'Arquivo muito grande',
-        description: `O arquivo deve ter no máximo ${maxSizeMB}MB`,
-        variant: 'destructive',
+        title: 'Limite de seleção',
+        description: `Você pode selecionar até ${allowed} imagem(ns) agora.`,
       });
-      return;
     }
 
-    // Show preview
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPreview(reader.result as string);
-    };
-    reader.readAsDataURL(file);
+    // Validação + preview (apenas modo de imagem única)
+    const firstFile = selectedFiles[0];
+    if (!firstFile) return;
 
-    // Upload
+    if (!multiple && showPreview) {
+      const fileSizeMB = firstFile.size / 1024 / 1024;
+      if (fileSizeMB > maxSizeMB) {
+        toast({
+          title: 'Arquivo muito grande',
+          description: `O arquivo deve ter no máximo ${maxSizeMB}MB`,
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => setPreview(reader.result as string);
+      reader.readAsDataURL(firstFile);
+    }
+
     setUploading(true);
     try {
-      const compressedFile = await compressImage(file);
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
-      const filePath = `${fileName}`;
+      for (const file of selectedFiles) {
+        const fileSizeMB = file.size / 1024 / 1024;
+        if (fileSizeMB > maxSizeMB) {
+          toast({
+            title: 'Arquivo muito grande',
+            description: `"${file.name}" excede ${maxSizeMB}MB e foi ignorado.`,
+            variant: 'destructive',
+          });
+          continue;
+        }
 
-      const { error: uploadError, data } = await supabase.storage
-        .from(bucket)
-        .upload(filePath, compressedFile, {
-          cacheControl: '3600',
-          upsert: false,
-        });
+        const compressedFile = await compressImage(file);
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+        const filePath = `${fileName}`;
 
-      if (uploadError) throw uploadError;
+        const { error: uploadError } = await supabase.storage
+          .from(bucket)
+          .upload(filePath, compressedFile, {
+            cacheControl: '3600',
+            upsert: false,
+          });
 
-      const { data: { publicUrl } } = supabase.storage
-        .from(bucket)
-        .getPublicUrl(filePath);
+        if (uploadError) throw uploadError;
 
-      onUploadComplete(publicUrl);
-      
+        const {
+          data: { publicUrl },
+        } = supabase.storage.from(bucket).getPublicUrl(filePath);
+
+        onUploadComplete(publicUrl);
+      }
+
       toast({
         title: 'Upload concluído',
-        description: 'Imagem enviada com sucesso',
+        description:
+          selectedFiles.length > 1
+            ? `${selectedFiles.length} imagens enviadas com sucesso`
+            : 'Imagem enviada com sucesso',
       });
+
+      if (resetAfterUpload || multiple || !showPreview) {
+        setPreview(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
     } catch (error: any) {
       console.error('Error uploading image:', error);
       toast({
@@ -128,7 +173,10 @@ export default function ImageUpload({
         description: error.message,
         variant: 'destructive',
       });
-      setPreview(null);
+      if (resetAfterUpload || multiple || !showPreview) {
+        setPreview(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }
     } finally {
       setUploading(false);
     }
@@ -148,12 +196,13 @@ export default function ImageUpload({
         ref={fileInputRef}
         type="file"
         accept={accept}
+        multiple={multiple}
         onChange={handleFileSelect}
         className="hidden"
         disabled={uploading}
       />
       
-      {preview ? (
+      {showPreview && preview ? (
         <div className="relative">
           <img
             src={preview}
@@ -186,7 +235,7 @@ export default function ImageUpload({
           ) : (
             <>
               <Upload className="h-6 w-6 mr-2" />
-              Clique para fazer upload
+              {multiple ? 'Selecionar imagens' : 'Clique para fazer upload'}
             </>
           )}
         </Button>
