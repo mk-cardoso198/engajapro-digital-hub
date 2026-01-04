@@ -249,29 +249,42 @@ export default function ProjectDialog({
           </div>
 
           <div className="space-y-2">
-            <Label className="text-white">Galeria de Imagens (máx. 5)</Label>
-            {formData.gallery_images.length < 5 && (
-              <ImageUpload
-                bucket="project-images"
-                onUploadComplete={handleAddGalleryImage}
-              />
-            )}
+            <Label className="text-white">Galeria de Imagens ({formData.gallery_images.length}/5)</Label>
+            
+            {/* Imagens já adicionadas */}
             {formData.gallery_images.length > 0 && (
-              <div className="grid grid-cols-3 gap-2 mt-2">
+              <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
                 {formData.gallery_images.map((img, index) => (
-                  <div key={index} className="relative">
-                    <img src={img} alt={`Gallery ${index + 1}`} className="w-full h-24 object-cover rounded" />
+                  <div key={index} className="relative group">
+                    <img 
+                      src={img} 
+                      alt={`Galeria ${index + 1}`} 
+                      className="w-full h-20 object-cover rounded border border-white/20" 
+                    />
                     <Button
                       type="button"
                       size="icon"
                       variant="destructive"
-                      className="absolute top-1 right-1 h-6 w-6"
+                      className="absolute top-1 right-1 h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity"
                       onClick={() => handleRemoveGalleryImage(index)}
                     >
                       <X className="h-3 w-3" />
                     </Button>
                   </div>
                 ))}
+              </div>
+            )}
+            
+            {/* Botão para adicionar mais imagens */}
+            {formData.gallery_images.length < 5 && (
+              <div className="mt-2">
+                <ImageUpload
+                  bucket="project-images"
+                  onUploadComplete={handleAddGalleryImage}
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Você pode adicionar até {5 - formData.gallery_images.length} imagens
+                </p>
               </div>
             )}
           </div>
