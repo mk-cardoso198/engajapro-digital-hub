@@ -228,14 +228,14 @@ export default function ProjectDetail() {
           >
             <CarouselContent>
               {allImages.map((image, index) => (
-                <CarouselItem key={index}>
-                  <div className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden group">
+              <CarouselItem key={index}>
+                  <div className="relative rounded-xl md:rounded-2xl overflow-hidden group bg-card/30">
                     <img
                       src={image}
                       alt={`${project.title} - Imagem ${index + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-auto max-h-[70vh] object-contain mx-auto transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
                 </CarouselItem>
               ))}
