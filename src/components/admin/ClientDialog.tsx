@@ -18,6 +18,7 @@ type Client = {
   logo_url: string;
   display_order: number;
   active: boolean;
+  row_position: number;
 };
 
 type ClientDialogProps = {
@@ -37,6 +38,7 @@ export default function ClientDialog({
     name: '',
     logo_url: '',
     display_order: 0,
+    row_position: 1,
   });
   const [loading, setLoading] = useState(false);
 
@@ -46,12 +48,14 @@ export default function ClientDialog({
         name: client.name,
         logo_url: client.logo_url,
         display_order: client.display_order,
+        row_position: client.row_position || 1,
       });
     } else {
       setFormData({
         name: '',
         logo_url: '',
         display_order: 0,
+        row_position: 1,
       });
     }
   }, [client]);
@@ -141,6 +145,37 @@ export default function ClientDialog({
               onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
               className="bg-gray-800/50 border-border text-foreground"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-foreground">Fileira do Carrossel *</Label>
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant={formData.row_position === 1 ? "default" : "outline"}
+                onClick={() => setFormData({ ...formData, row_position: 1 })}
+                className={formData.row_position === 1 
+                  ? "flex-1 bg-primary hover:bg-primary/90" 
+                  : "flex-1 bg-gray-800/50 border-border text-foreground hover:bg-gray-700/50"
+                }
+              >
+                Fileira de Cima
+              </Button>
+              <Button
+                type="button"
+                variant={formData.row_position === 2 ? "default" : "outline"}
+                onClick={() => setFormData({ ...formData, row_position: 2 })}
+                className={formData.row_position === 2 
+                  ? "flex-1 bg-primary hover:bg-primary/90" 
+                  : "flex-1 bg-gray-800/50 border-border text-foreground hover:bg-gray-700/50"
+                }
+              >
+                Fileira de Baixo
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Escolha em qual fileira do carrossel este logo será exibido
+            </p>
           </div>
 
           <div className="space-y-2">

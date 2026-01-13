@@ -13,6 +13,7 @@ type Client = {
   logo_url: string;
   display_order: number;
   active: boolean;
+  row_position: number;
 };
 
 export default function ClientsManager() {
@@ -103,6 +104,8 @@ export default function ClientsManager() {
   }
 
   const activeClients = clients.filter(c => c.active);
+  const topRowClients = activeClients.filter(c => c.row_position === 1);
+  const bottomRowClients = activeClients.filter(c => c.row_position === 2);
 
   return (
     <div className="space-y-6">
@@ -141,35 +144,41 @@ export default function ClientsManager() {
           <div className="overflow-hidden">
             {activeClients.length > 0 ? (
               <div className="space-y-4">
-                {/* Carrossel 1 - Esquerda */}
-                <div className="flex animate-marquee gap-8">
-                  {[...activeClients, ...activeClients].map((client, index) => (
-                    <div
-                      key={`preview-1-${client.id}-${index}`}
-                      className="flex-shrink-0 w-24 h-16 bg-gray-800/50 rounded-lg flex items-center justify-center p-2"
-                    >
-                      <img
-                        src={client.logo_url}
-                        alt={client.name}
-                        className="max-w-full max-h-full object-contain opacity-70"
-                      />
-                    </div>
-                  ))}
+                {/* Carrossel 1 - Fileira de Cima */}
+                <div>
+                  <p className="text-xs text-muted-foreground mb-2">Fileira de Cima ({topRowClients.length} clientes)</p>
+                  <div className="flex animate-marquee gap-8">
+                    {[...topRowClients, ...topRowClients].map((client, index) => (
+                      <div
+                        key={`preview-1-${client.id}-${index}`}
+                        className="flex-shrink-0 w-24 h-16 bg-gray-800/50 rounded-lg flex items-center justify-center p-2"
+                      >
+                        <img
+                          src={client.logo_url}
+                          alt={client.name}
+                          className="max-w-full max-h-full object-contain opacity-70"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                {/* Carrossel 2 - Direita */}
-                <div className="flex animate-marquee-reverse gap-8">
-                  {[...activeClients, ...activeClients].map((client, index) => (
-                    <div
-                      key={`preview-2-${client.id}-${index}`}
-                      className="flex-shrink-0 w-24 h-16 bg-gray-800/50 rounded-lg flex items-center justify-center p-2"
-                    >
-                      <img
-                        src={client.logo_url}
-                        alt={client.name}
-                        className="max-w-full max-h-full object-contain opacity-70"
-                      />
-                    </div>
-                  ))}
+                {/* Carrossel 2 - Fileira de Baixo */}
+                <div>
+                  <p className="text-xs text-muted-foreground mb-2">Fileira de Baixo ({bottomRowClients.length} clientes)</p>
+                  <div className="flex animate-marquee-reverse gap-8">
+                    {[...bottomRowClients, ...bottomRowClients].map((client, index) => (
+                      <div
+                        key={`preview-2-${client.id}-${index}`}
+                        className="flex-shrink-0 w-24 h-16 bg-gray-800/50 rounded-lg flex items-center justify-center p-2"
+                      >
+                        <img
+                          src={client.logo_url}
+                          alt={client.name}
+                          className="max-w-full max-h-full object-contain opacity-70"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -209,9 +218,18 @@ export default function ClientsManager() {
                 </span>
               </div>
 
-              {!client.active && (
-                <span className="text-xs text-yellow-500">(Oculto)</span>
-              )}
+              <div className="flex items-center gap-2">
+                <span className={`px-1.5 py-0.5 text-xs rounded-full whitespace-nowrap ${
+                  client.row_position === 1 
+                    ? 'bg-blue-500/20 text-blue-400' 
+                    : 'bg-purple-500/20 text-purple-400'
+                }`}>
+                  {client.row_position === 1 ? '↑ Cima' : '↓ Baixo'}
+                </span>
+                {!client.active && (
+                  <span className="text-xs text-yellow-500">(Oculto)</span>
+                )}
+              </div>
 
               {/* Action Buttons */}
               <div className="flex gap-1 pt-1">
