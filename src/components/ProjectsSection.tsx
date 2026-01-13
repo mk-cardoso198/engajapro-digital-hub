@@ -94,50 +94,62 @@ export default function ProjectsSection() {
             <p>Nenhum projeto disponível no momento.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {projects.map((project, index) => (
-            <Link key={project.id} to={`/projeto/${project.id}`}>
-              <Card 
-                className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden cursor-pointer h-full flex flex-col"
-              >
-              <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden flex-shrink-0">
-                {project.cover_image ? (
-                  <img 
-                    src={project.cover_image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <>
-                    <div className="absolute inset-0 bg-black/40" />
-                    <span className="text-white/60 text-xl font-semibold z-10">Em breve</span>
-                  </>
-                )}
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {projects.slice(0, 9).map((project) => (
+                <Link key={project.id} to={`/projeto/${project.id}`}>
+                  <Card 
+                    className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden cursor-pointer h-full flex flex-col"
+                  >
+                    <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden flex-shrink-0">
+                      {project.cover_image ? (
+                        <img 
+                          src={project.cover_image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-black/40" />
+                          <span className="text-white/60 text-xl font-semibold z-10">Em breve</span>
+                        </>
+                      )}
+                    </div>
+                    <CardHeader className="pt-6 flex-1 flex flex-col">
+                      <div className="flex items-start justify-between gap-2">
+                        <CardTitle className="text-white text-lg md:text-xl line-clamp-1">{project.title}</CardTitle>
+                        <ExternalLink className="w-4 h-4 md:w-5 md:h-5 text-white/40 group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                      </div>
+                      <CardDescription className="text-white/60 text-sm md:text-base line-clamp-2 flex-1">
+                        {project.description}
+                      </CardDescription>
+                      <div className="mt-2">
+                        <span className="text-xs font-semibold text-blue-400 bg-blue-500/20 px-2 md:px-3 py-1 rounded-full">
+                          {project.category}
+                        </span>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="flex items-center gap-2 text-green-400 font-semibold text-sm md:text-base line-clamp-1">
+                        <span className="text-xl md:text-2xl flex-shrink-0">↗</span>
+                        <span className="line-clamp-1">{project.results}</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            {projects.length > 9 && (
+              <div className="flex justify-center mt-8 md:mt-12">
+                <Link 
+                  to="/projetos"
+                  className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105"
+                >
+                  Ver mais
+                </Link>
               </div>
-              <CardHeader className="pt-6 flex-1 flex flex-col">
-                <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="text-white text-lg md:text-xl line-clamp-1">{project.title}</CardTitle>
-                  <ExternalLink className="w-4 h-4 md:w-5 md:h-5 text-white/40 group-hover:text-blue-400 transition-colors flex-shrink-0" />
-                </div>
-                <CardDescription className="text-white/60 text-sm md:text-base line-clamp-2 flex-1">
-                  {project.description}
-                </CardDescription>
-                <div className="mt-2">
-                  <span className="text-xs font-semibold text-blue-400 bg-blue-500/20 px-2 md:px-3 py-1 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex items-center gap-2 text-green-400 font-semibold text-sm md:text-base line-clamp-1">
-                  <span className="text-xl md:text-2xl flex-shrink-0">↗</span>
-                  <span className="line-clamp-1">{project.results}</span>
-                </div>
-              </CardContent>
-            </Card>
-            </Link>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>
