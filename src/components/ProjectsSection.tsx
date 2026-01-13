@@ -98,9 +98,9 @@ export default function ProjectsSection() {
             {projects.map((project, index) => (
             <Link key={project.id} to={`/projeto/${project.id}`}>
               <Card 
-                className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden cursor-pointer"
+                className="bg-black/80 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 group overflow-hidden cursor-pointer h-full flex flex-col"
               >
-              <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden">
+              <div className="w-full h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 flex items-center justify-center border-b border-white/10 relative overflow-hidden flex-shrink-0">
                 {project.cover_image ? (
                   <img 
                     src={project.cover_image} 
@@ -114,12 +114,12 @@ export default function ProjectsSection() {
                   </>
                 )}
               </div>
-              <CardHeader className="pt-6">
-                <div className="flex items-start justify-between">
-                  <CardTitle className="text-white text-lg md:text-xl">{project.title}</CardTitle>
-                  <ExternalLink className="w-4 h-4 md:w-5 md:h-5 text-white/40 group-hover:text-blue-400 transition-colors" />
+              <CardHeader className="pt-6 flex-1 flex flex-col">
+                <div className="flex items-start justify-between gap-2">
+                  <CardTitle className="text-white text-lg md:text-xl line-clamp-1">{project.title}</CardTitle>
+                  <ExternalLink className="w-4 h-4 md:w-5 md:h-5 text-white/40 group-hover:text-blue-400 transition-colors flex-shrink-0" />
                 </div>
-                <CardDescription className="text-white/60 text-sm md:text-base">
+                <CardDescription className="text-white/60 text-sm md:text-base line-clamp-2 flex-1">
                   {project.description}
                 </CardDescription>
                 <div className="mt-2">
@@ -128,10 +128,10 @@ export default function ProjectsSection() {
                   </span>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-2 text-green-400 font-semibold text-sm md:text-base">
-                  <span className="text-xl md:text-2xl">↗</span>
-                  <span>{project.results}</span>
+              <CardContent className="pt-0">
+                <div className="flex items-center gap-2 text-green-400 font-semibold text-sm md:text-base line-clamp-1">
+                  <span className="text-xl md:text-2xl flex-shrink-0">↗</span>
+                  <span className="line-clamp-1">{project.results}</span>
                 </div>
               </CardContent>
             </Card>
