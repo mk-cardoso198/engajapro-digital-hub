@@ -252,7 +252,7 @@ export default function ProjectDialog({
           </div>
 
           <div className="space-y-2">
-            <Label className="text-white">Galeria de Imagens ({formData.gallery_images.length})</Label>
+            <Label className="text-white">Galeria de Imagens (sem limite) ({formData.gallery_images.length})</Label>
             
             {/* Imagens já adicionadas */}
             {formData.gallery_images.length > 0 && (
