@@ -235,7 +235,7 @@ export default function ImageUpload({
           ) : (
             <>
               <Upload className="h-6 w-6 mr-2" />
-              {multiple ? 'Selecionar imagens' : 'Clique para fazer upload'}
+              {multiple ? 'Selecionar imagens (sem limite)' : 'Clique para fazer upload'}
             </>
           )}
         </Button>
