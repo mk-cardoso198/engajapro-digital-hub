@@ -109,13 +109,10 @@ export default function ProjectDialog({
   const handleAddGalleryImage = (url: string) => {
     if (!url) return;
 
-    setFormData((prev) => {
-      if (prev.gallery_images.length >= 5) return prev;
-      return {
-        ...prev,
-        gallery_images: [...prev.gallery_images, url].slice(0, 5),
-      };
-    });
+    setFormData((prev) => ({
+      ...prev,
+      gallery_images: [...prev.gallery_images, url],
+    }));
   };
 
   const handleRemoveGalleryImage = (index: number) => {
@@ -255,7 +252,7 @@ export default function ProjectDialog({
           </div>
 
           <div className="space-y-2">
-            <Label className="text-white">Galeria de Imagens ({formData.gallery_images.length}/5)</Label>
+            <Label className="text-white">Galeria de Imagens ({formData.gallery_images.length})</Label>
             
             {/* Imagens já adicionadas */}
             {formData.gallery_images.length > 0 && (
@@ -282,21 +279,18 @@ export default function ProjectDialog({
             )}
             
             {/* Botão para adicionar mais imagens */}
-            {formData.gallery_images.length < 5 && (
-              <div className="mt-2">
-                <ImageUpload
-                  bucket="project-images"
-                  onUploadComplete={handleAddGalleryImage}
-                  multiple
-                  showPreview={false}
-                  resetAfterUpload
-                  maxFiles={5 - formData.gallery_images.length}
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  Você pode adicionar até {5 - formData.gallery_images.length} imagens
-                </p>
-              </div>
-            )}
+            <div className="mt-2">
+              <ImageUpload
+                bucket="project-images"
+                onUploadComplete={handleAddGalleryImage}
+                multiple
+                showPreview={false}
+                resetAfterUpload
+              />
+              <p className="text-xs text-muted-foreground mt-1">
+                Adicione quantas imagens quiser
+              </p>
+            </div>
           </div>
 
           <div className="space-y-2">
