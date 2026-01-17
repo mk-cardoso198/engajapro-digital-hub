@@ -286,6 +286,7 @@ export default function ProjectDialog({
                 multiple
                 showPreview={false}
                 resetAfterUpload
+                maxSizeMB={20}
               />
               <p className="text-xs text-muted-foreground mt-1">
                 Adicione quantas imagens quiser

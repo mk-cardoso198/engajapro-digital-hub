@@ -100,40 +100,24 @@ export default function ImageUpload({
       });
     }
 
-    // Validação + preview (apenas modo de imagem única)
     const firstFile = selectedFiles[0];
     if (!firstFile) return;
-
-    if (!multiple && showPreview) {
-      const fileSizeMB = firstFile.size / 1024 / 1024;
-      if (fileSizeMB > maxSizeMB) {
-        toast({
-          title: 'Arquivo muito grande',
-          description: `O arquivo deve ter no máximo ${maxSizeMB}MB`,
-          variant: 'destructive',
-        });
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result as string);
-      reader.readAsDataURL(firstFile);
-    }
 
     setUploading(true);
     try {
       for (const file of selectedFiles) {
-        const fileSizeMB = file.size / 1024 / 1024;
+        // Compress BEFORE validating size
+        const compressedFile = await compressImage(file);
+        const fileSizeMB = compressedFile.size / 1024 / 1024;
+
         if (fileSizeMB > maxSizeMB) {
           toast({
             title: 'Arquivo muito grande',
-            description: `"${file.name}" excede ${maxSizeMB}MB e foi ignorado.`,
+            description: `"${file.name}" ainda excede ${maxSizeMB}MB após compressão e foi ignorado.`,
             variant: 'destructive',
           });
           continue;
         }
-
-        const compressedFile = await compressImage(file);
         const fileExt = file.name.split('.').pop();
         const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
         const filePath = `${fileName}`;
